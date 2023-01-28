@@ -22,7 +22,6 @@ countries.fetchCountries(searchQuery)
     countryInfoCard.innerHTML = markup;
 })
 // .catch(onFetchError)
-// .finally(()=>inputEl.reset());
 };
 
 function createCard({name,capital,population,flags,languages}){
@@ -32,11 +31,6 @@ function createCard({name,capital,population,flags,languages}){
     <p>Languages:${languages}</p>
     `;
 }
-
-// function renderCountryCard(country){
-//     const markup = createCard;
-//     countryInfoCard.innerHTML = markup;
-// };
 
 // function onFetchError(error){
 //     Notiflix.Notify.failure('Oops, there is no country with that name');
