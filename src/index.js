@@ -16,20 +16,20 @@ e.preventDefault();
 
 const searchQuery = e.target.value;
 
-countries.fetchCountries(searchQuery)
-.then(country => {
-    const markup = createCard(country);
-    countryInfoCard.innerHTML = markup;
-})
-// .catch(onFetchError)
+countries.fetchCountries(searchQuery).then(country => {
+    console.log(country);
+    createCard(country[0]);
+});
 };
 
-function createCard({name,capital,population,flags,languages}){
-    return `<h2>${flags, name}</h2>
-    <p>Capital:${capital}</p>
-    <p>Population:${population}</p>
-    <p>Languages:${languages}</p>
+function createCard(country){
+    const markup = `<h2>${country.name.common}</h2>
+    <p>Capital:${country.capital}</p>
+    <p>Population:${country.population}</p>
+    <p>Languages:${country.languages}</p>
     `;
+    
+    countryInfoCard.innerHTML = markup;
 }
 
 // function onFetchError(error){
