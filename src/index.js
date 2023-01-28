@@ -17,17 +17,33 @@ e.preventDefault();
 const searchQuery = e.target.value;
 
 countries.fetchCountries(searchQuery)
-.then(renderCountryCard)
-.catch(onFetchError)
-.finally(()=>inputEl.reset());
+.then(country => {
+    const markup = createCard(country);
+    countryInfoCard.innerHTML = markup;
+})
+// .catch(onFetchError)
+// .finally(()=>inputEl.reset());
 };
 
-function renderCountryCard(country){
-    const markup = countries(country);
-    inputEl.innerHTML = markup;
-};
-
-function onFetchError(error){
-    Notiflix.Notify.failure('Oops, there is no country with that name');
+function createCard({name,capital,population,flags,languages}){
+    return `<h2>${flags, name}</h2>
+    <p>Capital:${capital}</p>
+    <p>Population:${population}</p>
+    <p>Languages:${languages}</p>
+    `;
 }
+
+// function renderCountryCard(country){
+//     const markup = createCard;
+//     countryInfoCard.innerHTML = markup;
+// };
+
+// function onFetchError(error){
+//     Notiflix.Notify.failure('Oops, there is no country with that name');
+// }
+
+// function createList(country){
+//     return `<li>${country}</li>`;
+// }
+
 
