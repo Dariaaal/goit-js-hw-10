@@ -22,9 +22,19 @@ countries.fetchCountries(searchQuery).then(country => {
 });
 };
 
+// function createCard({name, flags, capital, languages, population}){
+//     languages.map((lang) => lang.name).join(', ');
+//     const markup = `<h2><img src='${flags.svg}' alt='flag' width='100' height='100'/> ${name.official}</h2>
+//        <p>Capital: ${capital}</p>
+//        <p>Population: ${population}</p>
+//        <p>Languages: ${languages}</p>
+//        `;
+    
+//     countryInfoCard.innerHTML = markup;
+// }
+
 function createCard(country){
-    console.log(country);
-    const markup = `<h2>${country.flags, country.name.official}</h2>
+    const markup = `<h2><img src='${country.flags.svg}' alt='flag' width='30' class='country-flag'/>${country.name.official}</h2>
     <p>Capital: ${country.capital}</p>
     <p>Population: ${country.population}</p>
     <p>Languages: ${country.languages}</p>
@@ -33,12 +43,15 @@ function createCard(country){
     countryInfoCard.innerHTML = markup;
 }
 
+function createList(country){
+    const list = country.map(name => `<li>${country}</li>`);
+    countryList.innerHTML = list;
+}
+
 // function onFetchError(error){
 //     Notiflix.Notify.failure('Oops, there is no country with that name');
 // }
 
-// function createList(country){
-//     return `<li>${country}</li>`;
-// }
+
 
 
