@@ -23,10 +23,11 @@ countries.fetchCountries(searchQuery).then(country => {
 };
 
 function createCard(country){
-    const markup = `<h2>${country.name.common}</h2>
-    <p>Capital:${country.capital}</p>
-    <p>Population:${country.population}</p>
-    <p>Languages:${country.languages}</p>
+    console.log(country);
+    const markup = `<h2>${country.flags, country.name.official}</h2>
+    <p>Capital: ${country.capital}</p>
+    <p>Population: ${country.population}</p>
+    <p>Languages: ${country.languages}</p>
     `;
     
     countryInfoCard.innerHTML = markup;
