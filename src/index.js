@@ -5,7 +5,7 @@ import Notiflix from 'notiflix';
 
 const inputEl = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
-const countryInfoCard = document.querySelector('.country-info')
+const countryInfoCard = document.querySelector('.country-info');
 
 const DEBOUNCE_DELAY = 300;
 
@@ -16,41 +16,54 @@ e.preventDefault();
 
 const searchQuery = e.target.value;
 
-countries.fetchCountries(searchQuery).then(country => {
-    console.log(country);
-    createCard(country[0]);
+countries.fetchCountries(searchQuery.trim()).then(country => {
+
+    if (country.length >= 11){
+        Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
+        countryList.innerHTML = "";
+        return;
+    }
+
+    if (country.length >= 2){
+        createList(country);
+        countryInfoCard.innerHTML = "";
+        return;
+    }
+
+    if (country.length === 1){
+        createCard(country[0]);
+        countryList.innerHTML = "";
+        return;
+    }
+
+    if (country.status === 404) {
+        Notiflix.Notify.failure("Oops, there is no country with that name");
+        countryList.innerHTML = "";
+        countryInfoCard.innerHTML = "";
+    }     
+
 });
 };
 
-// function createCard({name, flags, capital, languages, population}){
-//     languages.map((lang) => lang.name).join(', ');
-//     const markup = `<h2><img src='${flags.svg}' alt='flag' width='100' height='100'/> ${name.official}</h2>
-//        <p>Capital: ${capital}</p>
-//        <p>Population: ${population}</p>
-//        <p>Languages: ${languages}</p>
-//        `;
-    
-//     countryInfoCard.innerHTML = markup;
-// }
-
 function createCard(country){
-    const markup = `<h2><img src='${country.flags.svg}' alt='flag' width='30' class='country-flag'/>${country.name.official}</h2>
+    const allLanguage = Object.values(country.languages);
+    const markup = `<h2><img src='${country.flags.svg}' alt='flag' width='30' class='country-flag'/>${country.name.common}</h2>
     <p>Capital: ${country.capital}</p>
     <p>Population: ${country.population}</p>
-    <p>Languages: ${country.languages}</p>
+    <p>Languages: ${allLanguage}</p>
     `;
     
     countryInfoCard.innerHTML = markup;
 }
 
 function createList(country){
-    const list = country.map(name => `<li>${country}</li>`);
+    const list = country.map(name =>
+    `<li class='list-elem'>
+    <p><img src='${name.flags.svg}' alt='flag' width='30' class='country-flag'/>${name.name.common}<p>
+    </li>`).join('');
     countryList.innerHTML = list;
 }
 
-// function onFetchError(error){
-//     Notiflix.Notify.failure('Oops, there is no country with that name');
-// }
 
 
 
