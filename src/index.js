@@ -18,7 +18,7 @@ const searchQuery = e.target.value.trim();
 
 countries.fetchCountries(searchQuery).then(country => {
 
-    if (inputEl.value === "") {
+    if (inputEl.value.trim() === "") {
         countryInfoCard.innerHTML = "";
         countryList.innerHTML = "";
         return;
