@@ -16,13 +16,13 @@ e.preventDefault();
 
 const searchQuery = e.target.value.trim();
 
-countries.fetchCountries(searchQuery).then(country => {
+if (searchQuery === "") {
+    countryInfoCard.innerHTML = "";
+    countryList.innerHTML = "";
+    return;
+}
 
-    if (inputEl.value.trim() === "") {
-        countryInfoCard.innerHTML = "";
-        countryList.innerHTML = "";
-        return;
-    }
+countries.fetchCountries(searchQuery).then(country => {
 
     if (country.length >= 11){
         Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
