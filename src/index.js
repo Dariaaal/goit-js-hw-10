@@ -18,6 +18,12 @@ const searchQuery = e.target.value;
 
 countries.fetchCountries(searchQuery.trim()).then(country => {
 
+    if (inputEl.value === "") {
+        countryInfoCard.innerHTML = "";
+        countryList.innerHTML = "";
+        return;
+    }
+
     if (country.length >= 11){
         Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
         countryList.innerHTML = "";
