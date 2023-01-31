@@ -14,9 +14,9 @@ inputEl.addEventListener('input', debounce(onInputChange,DEBOUNCE_DELAY));
 function onInputChange(e){
 e.preventDefault();
 
-const searchQuery = e.target.value;
+const searchQuery = e.target.value.trim();
 
-countries.fetchCountries(searchQuery.trim()).then(country => {
+countries.fetchCountries(searchQuery).then(country => {
 
     if (inputEl.value === "") {
         countryInfoCard.innerHTML = "";
